@@ -1,0 +1,47 @@
+### Exemplos de requisições (extensão REST Client do VS Code ou IntelliJ HTTP Client)
+@base = http://localhost:5000
+
+### Health check
+GET {{base}}/health
+
+### Listar categorias
+GET {{base}}/categorias
+
+### Criar categoria
+POST {{base}}/categorias
+Content-Type: application/json
+
+{ "nome": "Cabos", "descricao": "HDMI, USB-C e adaptadores" }
+
+### Listar produtos (com filtros opcionais)
+GET {{base}}/produtos?busca=mouse
+
+### Criar produto
+POST {{base}}/produtos
+Content-Type: application/json
+
+{ "nome": "Cabo HDMI 2m", "sku": "CAB-001", "preco": 39.9, "quantidade": 20, "estoque_minimo": 5, "categoria_id": 1 }
+
+### Atualizar parcialmente (PATCH)
+PATCH {{base}}/produtos/1
+Content-Type: application/json
+
+{ "preco": 79.9 }
+
+### Registrar saída de estoque
+POST {{base}}/produtos/1/movimentacoes
+Content-Type: application/json
+
+{ "tipo": "SAIDA", "quantidade": 3 }
+
+### Histórico de movimentações
+GET {{base}}/produtos/1/movimentacoes
+
+### Relatório: estoque baixo
+GET {{base}}/relatorios/estoque-baixo
+
+### Relatório: resumo por categoria
+GET {{base}}/relatorios/categorias
+
+### Excluir produto
+DELETE {{base}}/produtos/1
